@@ -52,11 +52,18 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             SizedBox(
               width: 75.h,
             ),
-
-
-            IconAppBar(
-              onPress: () {},
-              iconName: "cart",
+            Stack(
+              children: [
+                IconAppBar(
+                  onPress: () {},
+                  iconName: "cart",
+                ),
+                CircleAvatar(
+                  radius: 5,
+                  backgroundColor: Theme.of(context).primaryColor ,
+                  child: Text("4",style: TextStyle(fontSize: 5.sp , fontWeight: FontWeight.bold,color: Colors.white),),
+                )
+              ],
             ),
           ],
         ),

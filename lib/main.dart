@@ -2,7 +2,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thimar_course/core/logic/cache_helper.dart';
+import 'package:thimar_course/screens/home/pages/home/categories/cubit.dart';
+import 'package:thimar_course/screens/home/pages/home/products/cubit.dart';
+import 'package:thimar_course/screens/home/pages/home/slider/cubit.dart';
 import 'package:thimar_course/screens/home/view.dart';
 import 'core/design/colors.dart';
 import 'core/logic/cache_helper.dart';
@@ -13,7 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ChacheHelper.init();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Color(0xff4C8613),
+    statusBarColor: Colors.white,
   ));
   runApp(MyApp());
 }
@@ -25,19 +29,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      builder: (context, child) => MaterialApp(
-        title: "Thimar",
-        debugShowCheckedModeBanner: false,
-        navigatorKey: navigatorKey,
-        builder: (context, child) =>
-            Directionality(textDirection: TextDirection.rtl, child: child!),
-        theme: ThemeData(
-          fontFamily: "Tajawal",
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: AppBarTheme(color: Colors.white,elevation: 0),
-          primarySwatch: getMatrialColor(primaryColor.value),
+      builder: (context, child) => MultiBlocProvider(
+      providers: [
+        BlocProvider (create: (BuildContext context) => SliderCubit()..getSlider()),
+        BlocProvider (create: (BuildContext context) => CategoriesCubit()..getCategories()),
+        BlocProvider (create: (BuildContext context) => ProductCubit()..getProducts()),
+      ],
+        child: MaterialApp(
+          title: "Thimar",
+          debugShowCheckedModeBanner: false,
+          navigatorKey: navigatorKey,
+          builder: (context, child) =>
+              Directionality(textDirection: TextDirection.rtl, child: child!),
+          theme: ThemeData(
+            fontFamily: "Tajawal",
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: AppBarTheme(color: Colors.white,elevation: 0),
+            primarySwatch: getMatrialColor(primaryColor.value),
+          ),
+          home: HomeScreen(),
         ),
-        home: HomeScreen(),
       ),
     );
   }
