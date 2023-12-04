@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thimar_course/core/design/colors.dart';
-enum ButtonType { rejectButton, outlineButton, cancelButton, elevatedButton }
+enum ButtonType { rejectButton, outlineButton, cancelButton, elevatedButton ,smallButton }
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -37,6 +37,11 @@ class CustomButton extends StatelessWidget {
           onPress: onPress,
         );
       case ButtonType.elevatedButton:
+        return CustomElevatedButton(
+          text: text,
+          onPress: onPress,
+        );
+      case ButtonType.smallButton:
         return CustomElevatedButton(
           text: text,
           onPress: onPress,
@@ -78,6 +83,41 @@ class CustomElevatedButton extends StatelessWidget {
     );
   }
 }
+
+class CustomSmallButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPress;
+  final bool isBig ;
+
+
+
+  const CustomSmallButton({Key? key, this.text = "", required this.onPress, this.isBig = true})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Color(0xff4C8613).withOpacity(0.19),
+          blurRadius: 6.r,
+          offset: Offset(0.w, 3.h),
+        )
+      ]),
+      child: ElevatedButton(
+        onPressed: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+          onPress();
+        },
+        child: Text(text),
+        style: ElevatedButton.styleFrom(
+            fixedSize: Size(150.w, 50.h),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15).r)),
+      ),
+    );
+  }
+}
+
 
 class CustomOutlineButton extends StatelessWidget {
   final String text;
@@ -153,7 +193,7 @@ class CustomRejectButton extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            primary: Colors.red.withOpacity(0.9),
             fixedSize: Size(163.w, 60.h),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15).r)),
@@ -174,11 +214,11 @@ class CancelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Color(0xffFFE1E1),
-          blurRadius: 6.r,
-          offset: Offset(0.w, 3.h),
-        )
+        // BoxShadow(
+        //   color: Color(0xffFFE1E1),
+        //   blurRadius: 6.r,
+        //   offset: Offset(0.w, 3.h),
+        // )
       ]),
       child: ElevatedButton(
         onPressed: () {
@@ -187,7 +227,7 @@ class CancelButton extends StatelessWidget {
         },
         child: Text(
           text,
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.red, fontSize: 16,fontWeight: FontWeight.bold),
         ),
         style: ElevatedButton.styleFrom(
             primary: Color(0xffFFE1E1),

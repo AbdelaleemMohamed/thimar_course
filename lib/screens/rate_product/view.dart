@@ -6,6 +6,10 @@ class RateProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("تقييم المنتجات" ,style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 22,fontWeight: FontWeight.bold), ),
+
+      ),
 
     );
   }

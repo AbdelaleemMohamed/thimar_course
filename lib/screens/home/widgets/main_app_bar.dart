@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thimar_course/core/design/widgets/icon_app_bar.dart';
+import 'package:thimar_course/screens/cart/view.dart';
+
+import '../../../core/logic/helper_methods.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({Key? key}) : super(key: key);
@@ -55,7 +58,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             Stack(
               children: [
                 IconAppBar(
-                  onPress: () {},
+                  onPress: () {
+                    navigateTo(CartScreen());
+
+                  },
                   iconName: "cart",
                 ),
                 CircleAvatar(

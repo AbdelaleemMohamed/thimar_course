@@ -14,6 +14,7 @@ import 'package:thimar_course/screens/home/pages/home/slider/cubit.dart';
 import '../../../../core/design/widgets/custom_buttons.dart';
 import '../../../../core/logic/helper_methods.dart';
 import '../../../cart/view.dart';
+import '../../../product_ditails/view.dart';
 import '../../widgets/main_app_bar.dart';
 import 'slider/states.dart';
 
@@ -77,10 +78,10 @@ class _HomePageState extends State<HomePage> {
                        SizedBox(
                             height: 164.h,
                             // width: 375.h,
-                            child: CarouselSlider(
+                            child:
+                            CarouselSlider(
                               options: CarouselOptions(
                                 height: 164.h,
-
                                 onPageChanged: (index, reason) {
                                   currentIndex = index;
                                   setState(() {});
@@ -97,27 +98,33 @@ class _HomePageState extends State<HomePage> {
                                   fit: BoxFit.fill,
                                 ),
                               ),
-                            )),
+                            )
+
+                       ),
+
+
                        SizedBox(
                          height: 10.h,
                        ),
-                       Row(
-                           mainAxisAlignment: MainAxisAlignment.center,
-                           children: List.generate(
-                               state.list.length,
-                                   (index) => Padding(
-                                 padding: EdgeInsetsDirectional.only(end: 3),
-                                 child: CircleAvatar(
-                                     radius: 3.5.r,
-                                     backgroundColor: Theme.of(context)
-                                         .primaryColor
-                                         .withOpacity(currentIndex == index ? 1 : 0.38)),
-                               ))),
-                     ],
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                            state.list.length,
+                            (index) => Padding(
+                                  padding: EdgeInsetsDirectional.only(end: 3),
+                                  child: CircleAvatar(
+                                      radius: 3.5.r,
+                                      backgroundColor: Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(currentIndex == index
+                                              ? 1
+                                              : 0.38)),
+                                ))),
+                  ],
                    );
                   }else
                     {
-                      return Center(child: CircularProgressIndicator());
+                      return SizedBox(height: 164.h,child: Center(child: CircularProgressIndicator()));
                     }
             },
           ),
@@ -188,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                    );
                   }else
                     {
-                      return Center(child: CircularProgressIndicator());
+                      return SizedBox(height: 70.h,child: Center(child: CircularProgressIndicator()));
                     }
             },
           ),
@@ -217,120 +224,122 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
 
-
-                    GridView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 16.h),
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.list.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 160 / 260,
-                            crossAxisSpacing: 16.h,
-                            mainAxisSpacing: 16.h),
-                        itemBuilder: (context, index) => Container(
-                          padding: EdgeInsets.all(9.r),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(11.r),
-                                child: Stack(
-                                  alignment: Alignment.topLeft,
-                                  children: [
-                                    Image.network(state.list[index].mainImage,height: 117.h ,width: 145.w,fit: BoxFit.fill,),
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 3.w, horizontal: 10.h),
-                                      child: Padding(
-                                        padding: EdgeInsets.only(top: 4.0),
-                                        child: Text(state.list[index].discount.toString()+ " % ",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white),
-                                            textAlign: TextAlign.center),
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadiusDirectional.only(
-                                          bottomStart: Radius.circular(11),
+                    GestureDetector(
+                      onTap: (){navigateTo(ProductDetailsScreen());},
+                      child: GridView.builder(
+                          padding: EdgeInsets.symmetric(horizontal: 16.h),
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: state.list.length,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 160 / 260,
+                              crossAxisSpacing: 16.h,
+                              mainAxisSpacing: 16.h),
+                          itemBuilder: (context, index) => Container(
+                            padding: EdgeInsets.all(9.r),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(11.r),
+                                  child: Stack(
+                                    alignment: Alignment.topLeft,
+                                    children: [
+                                      Image.network(state.list[index].mainImage,height: 117.h ,width: 145.w,fit: BoxFit.fill,),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 3.w, horizontal: 10.h),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 4.0),
+                                          child: Text(state.list[index].discount.toString()+ " % ",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
+                                              textAlign: TextAlign.center),
                                         ),
-                                        color: Theme.of(context).primaryColor.withOpacity(0.85),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(
-                                state.list[index].title,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-
-                              Text(
-                                "سعر" + " 1 " + "كجم",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w200,
-                                    fontSize: 14,
-                                    color: Colors.grey),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-
-                              Text.rich(TextSpan(children: [
-                                TextSpan(
-                                  text:  state.list[index].price.toString()+ " ر.س | " ,
-                                  style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(
-                                  text: state.list[index].priceBeforeDiscount.toString(),
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.lineThrough),
-                                ),
-                              ])),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                                  child: CustomElevatedButton(
-                                    isBig: false,
-                                    onPress: () {
-                                      navigateTo(CartScreen());
-                                    },
-                                    text: "أضف للسلة ",
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadiusDirectional.only(
+                                            bottomStart: Radius.circular(11),
+                                          ),
+                                          color: Theme.of(context).primaryColor.withOpacity(0.85),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16.r),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
-                                  offset: Offset(0, 1),
-                                  blurRadius: 2.r)
-                            ],
-                          ),
-                        )),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  state.list[index].title,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: Theme.of(context).primaryColor),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+
+                                Text(
+                                  "سعر" + " 1 " + "كجم",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 14,
+                                      color: Colors.grey),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+
+                                Text.rich(TextSpan(children: [
+                                  TextSpan(
+                                    text:  state.list[index].price.toString()+ " ر.س | " ,
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  TextSpan(
+                                    text: state.list[index].priceBeforeDiscount.toString(),
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.lineThrough),
+                                  ),
+                                ])),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                    child: CustomSmallButton(
+                                      isBig: true,
+                                      onPress: () {
+                                        navigateTo(CartScreen());
+                                      },
+                                      text: "أضف للسلة ",
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16.r),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.05),
+                                    offset: Offset(0, 1),
+                                    blurRadius: 2.r)
+                              ],
+                            ),
+                          )),
+                    ),
 
 
                     SizedBox(
@@ -341,11 +350,7 @@ class _HomePageState extends State<HomePage> {
                 );
               }else
               {
-                return Center(
-                  child: CircularProgressIndicator(
-
-                  ),
-                );
+                return SizedBox(height: 164.h,child: Center(child: CircularProgressIndicator(),));
               }
             },
           ),

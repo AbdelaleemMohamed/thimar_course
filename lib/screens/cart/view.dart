@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:thimar_course/core/design/widgets/custom_buttons.dart';
+import '../../core/logic/helper_methods.dart';
+import '../complete_order/view.dart';
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
+class CartScreen extends StatefulWidget {
+   CartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+late int text = 1 ;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +79,8 @@ class CartScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.only(left: 4, right: 2),
+                                      margin:
+                                          EdgeInsets.only(left: 4, right: 2),
                                       height: 20,
                                       width: 20,
                                       decoration: BoxDecoration(
@@ -76,13 +88,21 @@ class CartScreen extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                       child: Center(
-                                          child: Text(
+                                          child: GestureDetector(onTap: (){
+                                            text++;
+                                            setState(() {
+
+                                            });
+                                          },
+                                            child: Text(
                                         "+",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: Theme.of(context).primaryColor,
-                                            fontSize: 18),
-                                      )),
+                                              fontWeight: FontWeight.w500,
+                                              color:
+                                                  Theme.of(context).primaryColor,
+                                              fontSize: 18),
+                                      ),
+                                          )),
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 4),
@@ -94,10 +114,11 @@ class CartScreen extends StatelessWidget {
                                       ),
                                       child: Center(
                                           child: Text(
-                                        "5",
+                                        "$text",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            color: Theme.of(context).primaryColor,
+                                            color:
+                                                Theme.of(context).primaryColor,
                                             fontSize: 14),
                                       )),
                                     ),
@@ -109,13 +130,22 @@ class CartScreen extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                       child: Center(
-                                          child: Text(
+                                          child: GestureDetector(onTap: (){
+                                            if(text > 1)
+                                            text--;
+                                            setState(() {
+
+                                            });
+                                          },
+                                            child: Text(
                                         "-",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: Theme.of(context).primaryColor,
-                                            fontSize: 18),
-                                      )),
+                                              fontWeight: FontWeight.w500,
+                                              color:
+                                                  Theme.of(context).primaryColor,
+                                              fontSize: 18),
+                                      ),
+                                          )),
                                     ),
                                   ],
                                 ),
@@ -133,20 +163,147 @@ class CartScreen extends StatelessWidget {
                             color: Colors.red.withOpacity(0.3),
                           ),
                           child: Center(
-                              child: SvgPicture.asset("assets/icons/svg/delet.svg")
-
-                          ),
+                              child: SvgPicture.asset(
+                                  "assets/icons/svg/delet.svg")),
                         ),
                       ],
                     ),
-                separatorBuilder: (BuildContext context, int index) => SizedBox(height: 12,),
-                itemCount: 4),
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                      height: 12,
+                    ),
+                itemCount: 8),
           ),
-         Row(
-           children: [
-            Text("عندك كوبون ؟ ادخل رقم الكوبون") 
-           ],
-         ) ,
+          Padding(
+            padding: EdgeInsets.only(top: 10, right: 16, left: 16, bottom: 8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    style: TextStyle(fontSize: 18),
+                    keyboardType: TextInputType.phone,
+                    textDirection: TextDirection.ltr,
+                    decoration: InputDecoration(
+                      filled: true,
+
+                      label: Text(
+                        "عندك كوبون ؟ ادخل رقم الكوبون",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15).r,
+                        ),
+                      isDense: true,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 20),
+                CustomSmallButton(
+                  onPress: () {},
+                  text: "تطبيق",
+                  isBig: false,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 12.0 ,top: 12),
+            child: Center(
+              child: Text(
+                "جميع الاسعار تشمل قيمة الضريبة المضافة 15%",
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor),
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(8),
+            width: 330,
+            height: 95,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                        child: Text(
+                      "اجمالي المنتجات",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Theme.of(context).primaryColor),
+                    )),
+                    Text(
+                      "180 ر.س",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Theme.of(context).primaryColor),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Text(
+                      "الخصم",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Theme.of(context).primaryColor),
+                    )),
+                    Text(
+                      "-40 ر.س",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Theme.of(context).primaryColor),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Colors.white,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Text(
+                      "المجموع",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Theme.of(context).primaryColor),
+                    )),
+                    Text(
+                      "140 ر.س",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Theme.of(context).primaryColor),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          CustomElevatedButton(
+            onPress: () {
+              navigateTo(CompleteOrderScreen());
+            },
+            text: "الانتقال لاتمام الطلب",
+            isBig: true,
+          ),
+          SizedBox(height: 16.h,),
         ],
       ),
     );

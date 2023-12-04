@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:thimar_course/screens/order_details/view.dart';
+
+import '../../../../core/logic/helper_methods.dart';
 
 class MyOrdersPage extends StatefulWidget {
   const MyOrdersPage({Key? key}) : super(key: key);
@@ -52,173 +55,179 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
         body: TabBarView(
           children: [
             Center(
-                child: ListView.builder(
+                child: GestureDetector(
+                  onTap:(){navigateTo(OrderDetailsScreen());},
+                  child: ListView.builder(
               itemBuilder: (context, index) => Container(
-                margin: EdgeInsets.only(right: 16, left: 16, top: 10),
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.grey.withOpacity(0.05),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            child: Text(
-                          "طلب | 2345",
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        )),
-                        Container(
-                          width: 100,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            color:
-                                Theme.of(context).primaryColor.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(child: Text("جاري التحضير")),
-                        )
-                      ],
-                    ),
-                    Text(
-                      "27 يونيو ، 2021",
-                      style: TextStyle(
-                          color: Colors.grey.withOpacity(0.5),
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    ),
-
-                    Row(
-                      children: [
-                         Expanded(
-                           child: SizedBox(
+                  margin: EdgeInsets.only(right: 16, left: 16, top: 10),
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.grey.withOpacity(0.05),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            "طلب | 2345",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          )),
+                          Container(
+                            width: 100,
                             height: 20,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 3,
-                              itemBuilder: (context, index) => Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Image.network(
-                                    "https://pluspng.com/img-png/png-tomato-tomato-png-3531.png",
-                                  ),
-                                ),
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8)),
-                              ),
-                              separatorBuilder: (c, i) {
-                                return SizedBox(width: 4);
-                              },
-
+                            decoration: BoxDecoration(
+                              color:
+                                  Theme.of(context).primaryColor.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(8),
                             ),
+                            child: Center(child: Text("جاري التحضير")),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "27 يونيو ، 2021",
+                        style: TextStyle(
+                            color: Colors.grey.withOpacity(0.5),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      ),
 
-                        ),
+                      Row(
+                        children: [
+                           Expanded(
+                             child: SizedBox(
+                              height: 20,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 3,
+                                itemBuilder: (context, index) => Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Image.network(
+                                      "https://pluspng.com/img-png/png-tomato-tomato-png-3531.png",
+                                    ),
+                                  ),
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8)),
+                                ),
+                                separatorBuilder: (c, i) {
+                                  return SizedBox(width: 4);
+                                },
 
-                         ),
+                              ),
 
-                        Text("180 ر.س", style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,fontSize: 14),),
+                          ),
+
+                           ),
+
+                          Text("180 ر.س", style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,fontSize: 14),),
 
 
 
-                      ],
-                    ),
-                  ],
-                ),
+                        ],
+                      ),
+                    ],
+                  ),
               ),
               itemCount: 6,
-            )),
+            ),
+                )),
             Center(
-                child: ListView.builder(
+                child: GestureDetector(
+                  onTap:(){navigateTo(OrderDetailsScreen());},
+                  child: ListView.builder(
               itemBuilder: (context, index) => Container(
-                margin: EdgeInsets.only(right: 16, left: 16, top: 10),
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.grey.withOpacity(0.05),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            child: Text(
-                              "طلب | 2345",
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                        Container(
-                          width: 60,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            color:
-                            Colors.red.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(child: Text("منتهي")),
-                        )
-                      ],
-                    ),
-                    Text(
-                      "27 يوليو ، 2021",
-                      style: TextStyle(
-                          color: Colors.grey.withOpacity(0.5),
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    ),
-
-                    Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
+                  margin: EdgeInsets.only(right: 16, left: 16, top: 10),
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.grey.withOpacity(0.05),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                                "طلب | 2345",
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          Container(
+                            width: 60,
                             height: 20,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 3,
-                              itemBuilder: (context, index) => Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Image.network(
-                                    "https://pluspng.com/img-png/png-tomato-tomato-png-3531.png",
+                            decoration: BoxDecoration(
+                              color:
+                              Colors.red.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(child: Text("منتهي")),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "27 يوليو ، 2021",
+                        style: TextStyle(
+                            color: Colors.grey.withOpacity(0.5),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      ),
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: 20,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 3,
+                                itemBuilder: (context, index) => Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Image.network(
+                                      "https://pluspng.com/img-png/png-tomato-tomato-png-3531.png",
+                                    ),
                                   ),
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8)),
                                 ),
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8)),
+                                separatorBuilder: (c, i) {
+                                  return SizedBox(width: 4);
+                                },
+
                               ),
-                              separatorBuilder: (c, i) {
-                                return SizedBox(width: 4);
-                              },
 
                             ),
 
                           ),
 
-                        ),
-
-                        Text("180 ر.س", style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,fontSize: 14),),
+                          Text("180 ر.س", style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,fontSize: 14),),
 
 
 
-                      ],
-                    ),
-                  ],
-                ),
+                        ],
+                      ),
+                    ],
+                  ),
               ),
               itemCount: 3,
-            )),
+            ),
+                )),
           ],
         ),
       ),

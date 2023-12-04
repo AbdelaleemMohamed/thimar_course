@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class MyAccountRow extends StatelessWidget implements PreferredSizeWidget {
+class MyAccountRow extends StatelessWidget  {
   const MyAccountRow(
       {Key? key, required this.text, required this.image, required this.onTap})
       : super(key: key);

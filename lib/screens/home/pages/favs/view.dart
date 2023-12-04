@@ -5,7 +5,12 @@ class FavsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("FavsPage"),);
+    return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 0,
+        title: Center(child: Text("المفضلة", style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),)),
+      ),
+    );
 
   }
 }
